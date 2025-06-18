@@ -1,5 +1,5 @@
 
-# 💖 My GF App – A Personalized Romantic Quiz App for Her
+# 💖 Love Quiz – A Personalized Romantic Quiz App for Her
 
 This project is a heartfelt, beautifully crafted mobile app built entirely with **React Native (Expo)** — made as a personal gift for developer brothers to show their love to there girl. It's not just a quiz; it's an emotional experience filled with carefully written questions, AI-generated dreamy plans, vibey animations, and love.
 
