@@ -1,50 +1,184 @@
-# Welcome to your Expo app 👋
+````markdown
+# 💖 My GF App – A Personalized Romantic Quiz App for Her
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project is a heartfelt, beautifully crafted mobile app built entirely with **React Native (Expo)** — made as a personal gift for developer brothers to show their love to there girl. It's not just a quiz; it's an emotional experience filled with carefully written questions, AI-generated dreamy plans, vibey animations, and love.
 
-## Get started
+Every detail — from the sparkle button to the heart animation and the music in the background — is designed to make her feel special.
 
-1. Install dependencies
+## ✨ What This App Does
 
-   ```bash
-   npm install
-   ```
+- 🧠 Asks **10 personalized questions** from a set of 150+
+- 💌 Based on her answers, generates:
+  - A **3–4 line Dream Travel Date Plan**
+  - A **7-line romantic “Her Vibe Summary”**
+- 🎵 Plays romantic lo-fi background music
+- 💖 Features animated hearts, sparkly buttons, soft gradients
+- 🔐 Uses secure sign-up/login with email (Clerk Auth)
+- 🔁 Allows restarting the quiz anytime
+- 🎨 UI is girly, soft, and designed to feel romantic and magical
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📸 Preview
+![WhatsApp Image 2025-06-18 at 23 05 28_e0be5599](https://github.com/user-attachments/assets/70975e5a-9119-4afe-a974-749896414603)
+![WhatsApp Image 2025-06-18 at 23 05 33_b98bf455](https://github.com/user-attachments/assets/6d156943-d80b-4147-82ec-0ee755cc5fc0)
+![WhatsApp Image 2025-06-18 at 23 05 40_aad82677](https://github.com/user-attachments/assets/6a6b4fa4-d686-4dac-bd06-ef1c98d12660)
+![WhatsApp Image 2025-06-18 at 23 05 51_975c1b09](https://github.com/user-attachments/assets/b863d32a-385d-4dde-96f2-c85b1f6a6668)
+![WhatsApp Image 2025-06-18 at 23 05 56_d4c7f71d](https://github.com/user-attachments/assets/8682eac6-3779-47b2-9693-243d90cdb997)
 
-In the output, you'll find options to open the app in a
+## 🛠️ Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| Feature | Technology |
+|--------|------------|
+| Frontend | React Native + Expo + TypeScript |
+| Auth | [Clerk](https://clerk.dev) (email/password login) |
+| AI | [Cohere AI](https://cohere.com) for prompt-based date/vibe generation |
+| Music & Animations | Lottie, Expo AV, Expo Linear Gradient |
+| Build Tool | EAS Build (`.aab` → `.apk`) |
+| Optional Storage (not required) | UploadThing (used in earlier stages, not active now) |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🔑 API Keys Required
 
-When you're ready, run:
+To run the app completely:
+
+### 1. **Clerk API Key**
+Create an account on [https://clerk.dev](https://clerk.dev) and get your `CLERK_PUBLISHABLE_KEY`.
+
+### 2. **Cohere AI Key**
+Create a free account on [https://cohere.com](https://cohere.com)  
+Then get your API key for generating date plans and vibe summaries.
+
+> 💡 Store both in a `config.ts` or `.env` file:
+```ts
+export const CLERK_KEY = "your-clerk-key-here";
+export const COHERE_API_KEY = "your-cohere-api-key-here";
+````
+
+---
+
+## 📦 How to Run Locally
+
+> This is an **Expo-managed project** — works great on Android and iOS via Expo Go or emulator.
+
+### ✅ 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/YOUR_USERNAME/my-gf-app.git
+cd my-gf-app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### ✅ 2. Install dependencies
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### ✅ 3. Set up your API keys
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Update your `config.ts` or `.env` with:
 
-## Join the community
+```ts
+export const CLERK_KEY = "your_clerk_key";
+export const COHERE_API_KEY = "your_cohere_key";
+```
 
-Join our community of developers creating universal apps.
+### ✅ 4. Start the app
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo start
+```
+
+Scan the QR code using **Expo Go** or run it in an Android/iOS emulator.
+
+---
+
+## 📲 How to Build the App (APK / AAB)
+
+### ✅ Build AAB file (for Google Play)
+
+```bash
+npx eas build --platform android
+```
+
+> This gives you an `.aab` file (used for publishing or converting to APK)
+
+---
+
+### ✅ Convert `.aab` to `.apk` (for direct phone install)
+
+Use [BundleTool](https://github.com/google/bundletool) to convert:
+
+```bash
+java -jar bundletool-all-x.y.z.jar build-apks \
+--bundle=your-app.aab \
+--output=output.apks \
+--mode=universal \
+--ks=my-release-key.jks \
+--ks-key-alias=my-key-alias \
+--ks-pass=pass:yourpass \
+--key-pass=pass:yourpass
+```
+
+Then:
+
+```bash
+rename output.apks output.zip
+unzip output.zip
+```
+
+Inside `universal/` you'll find `universal.apk` → install on your phone.
+
+---
+
+## 📁 Folder Structure (Simplified)
+
+```
+my-gf-app/
+├── app/
+│   ├── (auth)/         → Sign-in / Sign-up screens
+│   ├── (tabs)/         → Home & Result screens
+├── ai/                 → AI prompt generation logic
+├── api/                → Cohere API interaction
+├── assets/
+│   ├── animations/     → Lottie heart & sparkle JSONs
+│   └── audio/          → Background romantic music
+├── utils/              → Question bank (JSON)
+├── config.ts           → Your API keys
+```
+
+---
+
+## ❤️ Why I Made This App
+
+I made this not for a company or a resume — but to create something *beautiful, thoughtful, and fun* for someone I love.
+It’s more than just an app — it’s a memory, an experience, a smile, and a connection.
+
+If you're reading this and inspired — go build something meaningful too.
+
+---
+
+## 📝 License
+
+MIT — but don’t forget to **build with love** 💌
+Credit is always appreciated.
+
+---
+
+## 🙌 Connect
+
+If you like this app, give it a ⭐ or share your thoughts.
+This app is open, but the love behind it is personal ✨
+
+```
+
+---
+
+Let me know if you want:
+- A version with your actual GitHub repo link auto-filled
+- Help with uploading screenshots or a demo
+- Or want to write a pinned tweet for it 😉
+
+You’ve built something special, bro. Time to share it proudly 💖
+```
