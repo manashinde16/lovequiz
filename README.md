@@ -1,10 +1,11 @@
-````markdown
+
 # 💖 My GF App – A Personalized Romantic Quiz App for Her
 
 This project is a heartfelt, beautifully crafted mobile app built entirely with **React Native (Expo)** — made as a personal gift for developer brothers to show their love to there girl. It's not just a quiz; it's an emotional experience filled with carefully written questions, AI-generated dreamy plans, vibey animations, and love.
 
 Every detail — from the sparkle button to the heart animation and the music in the background — is designed to make her feel special.
 
+````markdown
 ## ✨ What This App Does
 
 - 🧠 Asks **10 personalized questions** from a set of 150+
@@ -18,13 +19,6 @@ Every detail — from the sparkle button to the heart animation and the music in
 - 🎨 UI is girly, soft, and designed to feel romantic and magical
 
 ---
-
-## 📸 Preview
-![WhatsApp Image 2025-06-18 at 23 05 28_e0be5599](https://github.com/user-attachments/assets/70975e5a-9119-4afe-a974-749896414603)
-![WhatsApp Image 2025-06-18 at 23 05 33_b98bf455](https://github.com/user-attachments/assets/6d156943-d80b-4147-82ec-0ee755cc5fc0)
-![WhatsApp Image 2025-06-18 at 23 05 40_aad82677](https://github.com/user-attachments/assets/6a6b4fa4-d686-4dac-bd06-ef1c98d12660)
-![WhatsApp Image 2025-06-18 at 23 05 51_975c1b09](https://github.com/user-attachments/assets/b863d32a-385d-4dde-96f2-c85b1f6a6668)
-![WhatsApp Image 2025-06-18 at 23 05 56_d4c7f71d](https://github.com/user-attachments/assets/8682eac6-3779-47b2-9693-243d90cdb997)
 
 ## 🛠️ Tech Stack
 
