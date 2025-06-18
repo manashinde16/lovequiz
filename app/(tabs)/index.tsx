@@ -1,75 +1,140 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+// app/(tabs)/index.tsx
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+} from "react-native";
+import { useRouter } from "expo-router";
+import { SignOutButton } from "../../components/SignOutButton";
+import { questions } from "../../utils/questions";
 
 export default function HomeScreen() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState<any[]>([]);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const fadeAnim = useState(new Animated.Value(1))[0];
+  const router = useRouter();
+
+  const currentQuestion = questions[currentIndex];
+
+  const handleSelect = (option: string) => {
+    if (selectedOption) return;
+    setSelectedOption(option);
+
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      const updatedAnswers = [
+        ...selectedAnswers,
+        { question: currentQuestion.text, answer: option },
+      ];
+      setSelectedAnswers(updatedAnswers);
+
+      if (updatedAnswers.length === 10) {
+        router.push({
+          pathname: "/ResultScreen",
+          params: {
+            selectedAnswers: JSON.stringify(updatedAnswers),
+          },
+        });
+      } else {
+        setCurrentIndex((prev) => prev + 1);
+        setSelectedOption(null);
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }).start();
+      }
+    });
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <View style={styles.topRow}>
+        <View style={{ flex: 1 }} />
+        <SignOutButton />
+      </View>
+
+      <Text style={styles.title}>Hi Beautiful 💖</Text>
+      <Text style={styles.subtitle}>Ready for your questions?</Text>
+
+      <Animated.View style={[styles.card, { opacity: fadeAnim }]}>
+        <Text style={styles.question}>{currentQuestion.text}</Text>
+        {currentQuestion.options.map((option) => (
+          <TouchableOpacity
+            key={option}
+            style={[
+              styles.option,
+              selectedOption === option ? styles.selectedOption : null,
+            ]}
+            onPress={() => handleSelect(option)}
+          >
+            <Text style={styles.optionText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+      </Animated.View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF0F5",
+    paddingHorizontal: 20,
+    paddingTop: 60,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  topRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  title: {
+    fontSize: 32,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#D63384",
+  },
+  subtitle: {
+    fontSize: 18,
+    textAlign: "center",
+    color: "#6C3483",
+    marginBottom: 30,
+  },
+  card: {
+    backgroundColor: "#FFE4E1",
+    padding: 25,
+    borderRadius: 20,
+    elevation: 4,
+  },
+  question: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 20,
+    color: "#4A148C",
+    textAlign: "center",
+  },
+  option: {
+    backgroundColor: "#FADADD",
+    padding: 14,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+  selectedOption: {
+    backgroundColor: "#F06292",
+    borderColor: "#AD1457",
+    borderWidth: 2,
+  },
+  optionText: {
+    fontSize: 16,
+    color: "#000",
+    textAlign: "center",
   },
 });
