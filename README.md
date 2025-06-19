@@ -164,15 +164,4 @@ Credit is always appreciated.
 
 If you like this app, give it a ⭐ or share your thoughts.
 This app is open, but the love behind it is personal ✨
-
-```
-
----
-
-Let me know if you want:
-- A version with your actual GitHub repo link auto-filled
-- Help with uploading screenshots or a demo
-- Or want to write a pinned tweet for it 😉
-
-You’ve built something special, bro. Time to share it proudly 💖
 ```
